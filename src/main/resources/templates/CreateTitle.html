@@ -1,19 +1,30 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta charset="UTF-8"/>
-<title>	Create Title</title>
-<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
-</head>
-<body>
-<div class="text-center">
-	<nav class="navbar navbar-light bg-light">
-	  <a class="navbar-brand" href="#">
-	    <img src="/img/icon.png" width="30" height="30" class="d-inline-block align-top" alt="">
-	    Charge
-	  </a>
-	</nav>
-</div>
-<script src="/js/bootstrap.min.js"></script>
-</body>
+<html  xmlns="http://www.w3.org/1999/xhtml"
+	   xmlns:th="http://www.thymeleaf.org"
+	   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	   layout:decorator="LayoutDefault">
+
+<section layout:fragment="RenderBody">
+	<form class="form-horizontal">
+		<div id="list">
+			<h2>Criar novo título</h2>
+			<article>
+				<label for = "description">Descrição</label>
+				<input type="text" name="description" width= "428" maxlength="120" >
+				<label for = "date" >Data</label>
+				<input type="date">
+				<label for="value">Valor</label>
+				<input type="number">
+				<label for="status" >Status</label>
+				<select id="inputState" class="form-control">
+        			<option selected>Pendente</option>
+        			<option selected>Recebido</option>
+      			</select>
+				
+				<a>Salvar</a>
+			</article>
+		</div>
+	</form>
+</section>
+		
 </html>
