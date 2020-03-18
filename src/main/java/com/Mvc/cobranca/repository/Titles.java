@@ -1,4 +1,4 @@
-package com.Mvc.cobranca;
+package com.Mvc.cobranca.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -5,7 +5,12 @@
 	   layout:decorator="LayoutDefault">
 
 <section layout:fragment="RenderBody">
-	<form class="card" method="POST" action="/title/create" th:object="${title}">
+	<form class="card" method="POST" action="/title" th:object="${title}">
+		<div class="alert alert-success" th:if="${!#strings.isEmpty(menssage)}">
+			<button type="button" class="close" data-dismiss = "alert"></button>
+			<span th:text="${menssage}"></span>
+		</div>
+		
 		<div class="card card-body">
 			<div class="card-body">
 				<div class= "clearfix">
@@ -14,37 +19,38 @@
 			</div>
 		</div>
 		<div class="card card-body">
-			<input type="hidden"/>
+			<input type="hidden"th:field="*{codigo}"/>
 			<div class="form-group row" >
 				<label for="description" class="col-sm-2 control-label">Descrição</label>
 				<div class="col-sm-4">
-					<input type="text" class="form-control" name="description" placeholder="ex: Ap 25A ">
+					<input type="text" class="form-control"  name="description" placeholder="ex: Ap 25A" 
+						   th:field="*{descricao}">
 				</div>
 			</div>
 			<div class="form-group row" >
 				<label for="dueDate" class="col-sm-2 control-label">Data de vencimento</label>
 				<div class="col-sm-4">
-					<input type="date" class="form-control" name="dueDate" id="dueDate" placeholder="ex: 10/10/2020"/>
+					<input type="text" class="form-control" name="dueDate" id="dueDate" th:field="*{dueDate}" placeholder="ex: 10/10/2020"/>
 				</div>
 			</div>
 			<div class="form-group row" >
 				<label for="value" class="col-sm-2 control-label">Valor</label>
 				<div class="col-sm-2">
-					<input type="number" name="value" class="form-control js-currency" placeholder="ex: 300.00" />
+					<input type="text" id="value" name="value" th:field="*{valor}" class="form-control js-currency" placeholder="ex: 300.00" />
 				</div>
 			</div>
 			<div class="form-group row">
 				<label for="states" class="col-sm-2 control-label">Status</label>
 				<div class="col-sm-2">
-					<select class="form-control" name="states" >
-						<option>Pendente</option>
-						<option>Recebido</option>
+					<select class="form-control" id="states" name="states" >
+						<option th:each="states : ${allStates}" 
+								th:value="${states}" th:text = "${states.description}"></option>
 					</select>
 				</div>
 					
 			</div>
 			<div class="form-group">
-					<div class="">
+					<div class="col-sm-offset-6 col-sm-5">
 						<button type="submit" id="button">Salvar</button>
 				    </div>
 			</div>
