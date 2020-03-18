@@ -27,7 +27,7 @@ public class Title {
 	private BigDecimal value;
 	
 	@Enumerated(EnumType.STRING)
-	private StatusTitle status;
+	private StatusTitle states;
 	
 	
 	public Long getCode() {
@@ -54,11 +54,11 @@ public class Title {
 	public void setValor(BigDecimal value) {
 		this.value = value;
 	}
-	public StatusTitle getStatus() {
-		return status;
+	public StatusTitle getStates() {
+		return states;
 	}
-	public void setStatus(StatusTitle status) {
-		this.status = status;
+	public void setStatus(StatusTitle states) {
+		this.states = states;
 	}
 	
 	@Override

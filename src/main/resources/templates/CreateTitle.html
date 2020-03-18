@@ -5,24 +5,49 @@
 	   layout:decorator="LayoutDefault">
 
 <section layout:fragment="RenderBody">
-	<form class="form-horizontal">
-		<div id="list">
-			<h2>Novo título</h2>
-			<article>
-				<label for = "description">Descrição</label>
-				<input type="text" id="description" width= "428" maxlength="120" >
-				<label for = "date" >Data</label>
-				<input type="date" id="date">
-				<label for="value">Valor</label>
-				<input type="number" id="value">
-				<label for="inputState" >Status</label>
-				<select id="inputState" class="form-control">
-        			<option selected>Pendente</option>
-        			<option selected>Recebido</option>
-      			</select>
-				
-				<a>Salvar</a>
-			</article>
+	<form class="card" method="POST" action="/title/create" th:object="${title}">
+		<div class="card card-body">
+			<div class="card-body">
+				<div class= "clearfix">
+					<h2 class="card-title aw-titulo-card">Novo titulo</h2>
+				</div>
+			</div>
+		</div>
+		<div class="card card-body">
+			<input type="hidden"/>
+			<div class="form-group row" >
+				<label for="description" class="col-sm-2 control-label">Descrição</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" name="description" placeholder="ex: Ap 25A ">
+				</div>
+			</div>
+			<div class="form-group row" >
+				<label for="dueDate" class="col-sm-2 control-label">Data de vencimento</label>
+				<div class="col-sm-4">
+					<input type="date" class="form-control" name="dueDate" id="dueDate" placeholder="ex: 10/10/2020"/>
+				</div>
+			</div>
+			<div class="form-group row" >
+				<label for="value" class="col-sm-2 control-label">Valor</label>
+				<div class="col-sm-2">
+					<input type="number" name="value" class="form-control js-currency" placeholder="ex: 300.00" />
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="states" class="col-sm-2 control-label">Status</label>
+				<div class="col-sm-2">
+					<select class="form-control" name="states" >
+						<option>Pendente</option>
+						<option>Recebido</option>
+					</select>
+				</div>
+					
+			</div>
+			<div class="form-group">
+					<div class="">
+						<button type="submit" id="button">Salvar</button>
+				    </div>
+			</div>
 		</div>
 	</form>
 </section>
