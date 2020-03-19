@@ -127,3 +127,24 @@ input{
 form{
 	background: cornflowerblue;
 }
+#link{
+    height: 42px;
+    border-radius: 5px;
+    border: 2px solid cornflowerblue;
+    background: none;
+    margin-top: 10px;
+    color: cornflowerblue;
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition:  all 0.2s;
+    width: 200px;
+}
+link:hover {
+    background:  cornflowerblue;
+    color: #ffff;
+
+}

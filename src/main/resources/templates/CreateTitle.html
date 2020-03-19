@@ -13,6 +13,12 @@
 			<span th:text="${menssage}"></span>
 		</div>
 		
+		<div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
+			<div th:each="detailedError : ${#fields.detailedErrors()}">
+				<span th:text="${detailedError.message}"></span>
+			</div>
+		</div>
+		
 		<div class="card card-body">
 			<div class= "clearfix">
 				<h2 class="card-title aw-titulo-card">Novo titulo</h2>
@@ -24,21 +30,24 @@
 			<div class="form-group row" >
 				<label for="description" class="col-sm-2 control-label">Descrição</label>
 				<div class="col-sm-4">
-					<input type="text" class="form-control"  name="description" placeholder="ex: Ap 25A" >
+					<input type="text" class="form-control"  name="description" placeholder="ex: Ap 23B " th:field="*{description}"
+							th:classappend="${#fields.hasErrors('description')} ? is-invalid">
 				</div>
 			</div>
 			
 			<div class="form-group row" >
 				<label for="dueDate" class="col-sm-2 control-label">Data de Vencimento</label>
 				<div class="col-sm-4">
-					<input type="text" class="form-control" id="duDate" name="dueDate" placeholder="ex: Ap 28/02/2000  " >
+					<input type="text" class="form-control" id="dueDate" name="dueDate" placeholder="ex: 28/02/2000 " 
+						th:field="*{dueDate}"  th:classappend="${#fields.hasErrors('dueDate')} ? is-invalid">
 				</div>
 			</div>
 			
 			<div class="form-group row" >
-				<label for="value" class="col-sm-2 control-label">Valor</label>
+				<label for="value" class="col-sm-2 control-label" >Valor</label>
 				<div class="col-sm-4">
-					<input type="text" class="form-control"  name="value" placeholder="ex: Ap 00,00.00" >
+					<input type="text" class="form-control" id="value" name="value" placeholder="ex: R$ 00,00.00" th:field="*{value}" 
+						th:classappend="${#fields.hasErrors('value')} ? is-invalid" >
 				</div>
 			</div>
 			<div class="form-group row">

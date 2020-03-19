@@ -5,11 +5,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.Mvc.cobranca.model.StatusTitle;
 import com.Mvc.cobranca.model.Title;
@@ -25,13 +27,13 @@ public class TitleController {
     private Titles titles;
     
     @RequestMapping
-	public ModelAndView index(@RequestParam(defaultValue="") String description) {
+	public ModelAndView index() {
 		
-		Iterable<Title> allTitles = titles.findByDescriptionContaining(description);
+		List<Title> allTitles = titles.findAll();
 
 		ModelAndView mv = new ModelAndView("Title");
 		
-		mv.addObject("titulos", allTitles);
+		mv.addObject("titles", allTitles);
 		return mv;
 
 	}
@@ -39,16 +41,19 @@ public class TitleController {
     @RequestMapping("/create")
     public ModelAndView create() {
     	ModelAndView mv = new ModelAndView("CreateTitle");
+    	mv.addObject(new Title());
         return mv;
     }
     
     @RequestMapping(method = RequestMethod.POST)
-    public ModelAndView save(Title title) {
-    	System.out.println(title.getValue());
-    	titles.save(title);
-    	ModelAndView mv = new ModelAndView("CreateTitle");
-    	mv.addObject("menssage", "Título salvo com sucesso!");
-        return mv ;
+    public String save(@Validated Title title, Errors errors, RedirectAttributes attributes) {
+    	
+    	if(errors.hasErrors()) {
+    		return "CreateTitle";
+    	}   	
+	    	titles.save(title);
+	    	attributes.addFlashAttribute("menssage", "Título salvo com sucesso!");
+	        return "redirect:/title/create" ;
     }
     
     @ModelAttribute("allStates")

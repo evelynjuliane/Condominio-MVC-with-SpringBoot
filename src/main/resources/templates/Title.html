@@ -9,6 +9,7 @@
 	<div class="card">
 		<div class="card-header ">
 			<h1>Pesquisa de títulos</h1>
+			<a id="link" class="btn btn-link" href="/title/create">Criar novo título</a>
 	</div>
 
 	<div class="card-body">
@@ -19,8 +20,7 @@
 					<div class="input-group">
 						<input class="form-control" placeholder="Buscar..." autofocus="autofocus" name="descricao">
 						<span class="input-group-btn" >
-						<button type="submit" class="btn btn-default">
-						</button>
+							<button type="submit" class="btn btn-default"><img src="img/icons8-pesquisar-50.png" width="30" height="30"/></button>
 						</span>
 					</div>
 				</div>
@@ -29,35 +29,31 @@
 		
 		<table class="table table-bordered table-striped">
 			<tr>
-				<th class="text-center  ">#</th>
+				<th class="text-center">#</th>
 				<th>Descrição</th>
-				<th class="text-center  ">Data de Vencimento</th>
-				<th class="text-right ">Valor</th>
-				<th class="text-right ">Status</th>
-				<th></th>
+				<th class="text-center">Data de Vencimento</th>
+				<th class="text-center ">Valor</th>
+				<th class="text-center ">Status</th>
+				<th>Ações</th>
 
 				</tr>
 
 				<tbody>
-					<tr th:each="titulo : ${titles}">
-						<td th:text="${titles.code}"></td>
+					<tr th:each="titles : ${titles}">
+						<td class="text-center" th:text="${titles.code}"></td>
 						<td th:text="${titles.description}"></td>
-						<td th:text="${{titles.dueDate}}"></td>
-						<td th:text="|R$ ${{titles.valor}}|"></td>
-						<td><span class="badge " th:text="${titles.states.description}"
-							th:classappend="${#strings.toString (titles.states) == 'PENDENTE' ? 'badge-danger' : 'badge-success'}"></span>
-						</td>
+						<td class="text-center" th:text="${{titles.dueDate}}"></td>
+						<td class="text-center" th:text="|R$ ${{titles.value}}|"></td>
+						<td class="text-center" th:text="${titles.states.description}"></td>
 						<td>
-							
-							<a class="btn btn-link btn-xs"
-							th:href="@{/titles/{code}(code=${titles.code})}"> AAA</a>
-							
-							
-
-					<tr>
-						<td colspan=6 th:if="${#lists.isEmpty(titles) }">nenhum
-							titulo foi encontrado!<img src="/icone/open-iconic/png/clock-2x.png"/></td>
-					</tr>
+						<a><img src="/img/icons8-editar-propriedade-32.png" /></a>
+						<a></a>
+						<a><img src="/img/icons8-excluir-32.png" /></a>
+						</td>
+				 	</tr>
+				 	<tr>
+				 		<td colspan="6" th:if="${#lists.isEmpty(titles)}">Nenhum título foi encontrado</td>
+				 	</tr>
 
 				</tbody>
 

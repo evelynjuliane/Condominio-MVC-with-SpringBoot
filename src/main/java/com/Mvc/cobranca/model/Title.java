@@ -11,6 +11,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
@@ -22,19 +26,25 @@ public class Title {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long code;
 	
+	@NotNull(message = "Error: Descrição é um campo obrigatório!")
+	@Size(min = 0, max =  40, message = "Error: A descrição não pode conter mais de 40 caracteres!")
 	private String description;
 	
-	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	@NotNull(message ="Error: Data de vencimento é um campo obrigatório!")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Temporal(TemporalType.DATE)
 	private Date dueDate;
 	
-	@NumberFormat(pattern = "#,##0.0")
+	@NotNull(message= "Error: Valor é um campo obrigatório!")
+	@DecimalMin(value = "0.01" , message = "Error: Valor não pode ser menor que 'R$0,01' !")
+	@DecimalMax(value = "9999999.99", message = "Error: Valor não pode ser maior que 'R$9.999.999,99' !")
+	@NumberFormat(pattern = "#,##0.00")
 	private BigDecimal value;
 	
 	@Enumerated(EnumType.STRING)
 	private StatusTitle states;
 	
-	
+		
 	public Long getCode() {
 		return code;
 	}
@@ -47,25 +57,25 @@ public class Title {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Date getdDueDate() {
+	public Date getDueDate() {
 		return dueDate;
 	}
-	public void setDataVencimento(Date dueDate) {
+	public void setDueDate(Date dueDate) {
 		this.dueDate = dueDate;
 	}
 	public BigDecimal getValue() {
 		return value;
 	}
-	public void setValor(BigDecimal value) {
+	public void setValue(BigDecimal value) {
 		this.value = value;
 	}
 	public StatusTitle getStates() {
 		return states;
 	}
-	public void setStatus(StatusTitle states) {
+	public void setStates(StatusTitle states) {
 		this.states = states;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
