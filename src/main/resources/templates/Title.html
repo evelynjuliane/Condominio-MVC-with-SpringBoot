@@ -1,1 +1,73 @@
-<h1>Hello</h1>
+<!DOCTYPE html>
+<html  xmlns="http://www.w3.org/1999/xhtml"
+	   xmlns:th="http://www.thymeleaf.org"
+	   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	   layout:decorator="LayoutDefault">
+
+<section layout:fragment="RenderBody">
+	
+	<div class="card">
+		<div class="card-header ">
+			<h1>Pesquisa de títulos</h1>
+	</div>
+
+	<div class="card-body">
+		
+		<form  method="GET" class="form-horizontal">
+			<div class="form-group">
+				<div class="col-sm-4">
+					<div class="input-group">
+						<input class="form-control" placeholder="Buscar..." autofocus="autofocus" name="descricao">
+						<span class="input-group-btn" >
+						<button type="submit" class="btn btn-default">
+						</button>
+						</span>
+					</div>
+				</div>
+			</div>
+		</form>
+		
+		<table class="table table-bordered table-striped">
+			<tr>
+				<th class="text-center  ">#</th>
+				<th>Descrição</th>
+				<th class="text-center  ">Data de Vencimento</th>
+				<th class="text-right ">Valor</th>
+				<th class="text-right ">Status</th>
+				<th></th>
+
+				</tr>
+
+				<tbody>
+					<tr th:each="titulo : ${titles}">
+						<td th:text="${titles.code}"></td>
+						<td th:text="${titles.description}"></td>
+						<td th:text="${{titles.dueDate}}"></td>
+						<td th:text="|R$ ${{titles.valor}}|"></td>
+						<td><span class="badge " th:text="${titles.states.description}"
+							th:classappend="${#strings.toString (titles.states) == 'PENDENTE' ? 'badge-danger' : 'badge-success'}"></span>
+						</td>
+						<td>
+							
+							<a class="btn btn-link btn-xs"
+							th:href="@{/titles/{code}(code=${titles.code})}"> AAA</a>
+							
+							
+
+					<tr>
+						<td colspan=6 th:if="${#lists.isEmpty(titles) }">nenhum
+							titulo foi encontrado!<img src="/icone/open-iconic/png/clock-2x.png"/></td>
+					</tr>
+
+				</tbody>
+
+			</table>
+
+		</div>
+		
+	</div>
+	
+	
+	
+	
+</section>

@@ -6,4 +6,6 @@ import com.Mvc.cobranca.model.Title;
 
 public interface Titles extends JpaRepository<Title, Long> {
 
+	public Iterable<Title> findByDescriptionContaining(String description);
+
 }
