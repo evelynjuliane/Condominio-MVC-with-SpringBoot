@@ -14,11 +14,11 @@
 
 	<div class="card-body">
 		
-		<form  method="GET" class="form-horizontal">
+		<form  method="GET" class="form-horizontal" th:object="${filter}">
 			<div class="form-group">
 				<div class="col-sm-4">
 					<div class="input-group">
-						<input class="form-control" placeholder="Buscar..." autofocus="autofocus" name="descricao">
+						<input class="form-control" placeholder="Buscar..." autofocus="autofocus" th:field="*{description}" name="description">
 						<span class="input-group-btn" >
 							<button type="submit" class="btn btn-default"><img src="img/icons8-pesquisar-50.png" width="30" height="30"/></button>
 						</span>
@@ -31,7 +31,7 @@
 			<tr>
 				<th class="text-center">#</th>
 				<th>Descrição</th>
-				<th class="text-center">Data de Vencimento</th>
+				<th class="text-center">Data de Vencimento </th>
 				<th class="text-center ">Valor</th>
 				<th class="text-center ">Status</th>
 				<th>Ações</th>
@@ -39,16 +39,22 @@
 				</tr>
 
 				<tbody>
-					<tr th:each="titles : ${titles}">
-						<td class="text-center" th:text="${titles.code}"></td>
-						<td th:text="${titles.description}"></td>
-						<td class="text-center" th:text="${{titles.dueDate}}"></td>
-						<td class="text-center" th:text="|R$ ${{titles.value}}|"></td>
-						<td class="text-center" th:text="${titles.states.description}"></td>
+					<tr th:each="title : ${titles}">
+						<td class="text-center" th:text="${title.code}"></td>
+						<td th:text="${title.description}"></td>
+						<td class="text-center" th:text="${{title.dueDate}}"></td>
+						<td class="text-center" th:text="|R$ ${{title.value}}|"></td>
+						<td class="text-center" th:text="${title.states.description}"></td>
 						<td>
-						<a><img src="/img/icons8-editar-propriedade-32.png" /></a>
-						<a></a>
-						<a><img src="/img/icons8-excluir-32.png" /></a>
+							<a class="btn btn-link btn-xs" th:href="@{/title/{code}(code=${{title.code}})}"
+								title="Editar" rel="tooltip" data-placement="top">
+								<img src="/img/icons8-editar-propriedade-32.png" />
+							</a>
+							<a class="btn btn-link btn-xs" th:href="@{/title/delete/{code}(code=${{title.code}})}"
+									title="Deletar" rel="tooltip" data-placement="top">
+								<img src="/img/icons8-excluir-32.png" />
+							</a>
+							
 						</td>
 				 	</tr>
 				 	<tr>
